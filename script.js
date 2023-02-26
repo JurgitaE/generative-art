@@ -1,8 +1,8 @@
 window.addEventListener('load', function () {
     const canvas = document.getElementById('canvas1');
     const ctx = canvas.getContext('2d'); //canvas 2D API
-    canvas.width = window.innerWidth * 0.8;
-    canvas.height = window.innerHeight * 0.8;
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 
     // canvas settings
     ctx.fillStyle = 'green';
@@ -14,26 +14,52 @@ window.addEventListener('load', function () {
 
     // EFFECT SETTINGS
     let size = 200;
-    let sides = 7;
-    //styles must be applied BEFORE a figurine is drawn
-    ctx.save();
-    ctx.translate(canvas.width / 2, canvas.height / 2); //rotation center change
-    ctx.scale(1, 1);
-    ctx.rotate(0);
-    // ctx.fillRect(0, 0, canvas.width, canvas.height);
+    let sides = 5;
+    let maxLevel = 3;
+    let scale = 0.5;
+    let spread = 0.8;
+    let branches = 2;
 
-    for (let i = 0; i < sides; i++) {
 
+    function drawBranch(level) {
+        if (level > maxLevel) return;
         ctx.beginPath();
         ctx.moveTo(0, 0); //starting point coordinates
         ctx.lineTo(size, 0);
         ctx.stroke();
 
-        ctx.rotate(Math.PI * 2 / sides); //takes value in radians/ one radian = 57.3deg. full circle Math.PI*2 radians
+        for (let i = 0; i < branches; i++) {
+            ctx.save();
+            ctx.translate(size - (size / branches) * i, 0);
+            ctx.rotate(spread);
+            ctx.scale(scale, scale);
+            drawBranch(level + 1);
+            ctx.restore();
+
+            ctx.save();
+            ctx.translate(size - (size / branches) * i, 0);
+            ctx.rotate(-spread);
+            ctx.scale(scale, scale);
+            drawBranch(level + 1);
+            ctx.restore();
+        }
 
     }
 
-    ctx.restore(); //removes all styling for the proceeding elements
+    function drawFractal() {
+        //styles must be applied BEFORE a figurine is drawn
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2); //rotation center change
+        ctx.scale(1, 1);
+        ctx.rotate(0);
+
+        for (let i = 0; i < sides; i++) {
+            ctx.rotate(Math.PI * 2 / sides); //takes value in radians/ one radian = 57.3deg. full circle Math.PI*2 radians
+            drawBranch(0);
 
 
+        }
+        ctx.restore(); //removes all styling for the proceeding elements
+    }
+    drawFractal();
 });
