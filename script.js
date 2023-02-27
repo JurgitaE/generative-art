@@ -21,7 +21,7 @@ window.addEventListener('load', function () {
 
     let sides = 5;
     let scale = 0.5;
-    let spread = 0.5;
+    let spread = 0.1;
     let color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
     let lineWidth = Math.floor(Math.random() * 20 + 10);
 
@@ -35,6 +35,15 @@ window.addEventListener('load', function () {
         updateSliders();
         drawFractal();
     });
+
+    const slider_sides = document.getElementById('sides');
+    const label_sides = document.querySelector('[for="sides"]');
+    slider_sides.addEventListener('change', (e) => {
+        sides = e.target.value;
+        updateSliders();
+        drawFractal();
+    });
+
 
     function drawBranch(level) {
         if (level > maxLevel) return;
@@ -77,6 +86,7 @@ window.addEventListener('load', function () {
         ctx.restore(); //removes all styling for the proceeding elements
     }
     drawFractal();
+    updateSliders(); //initial update
 
     function randomizeFractal() {
         sides = Math.floor(Math.random() * 7) + 2;
@@ -84,14 +94,18 @@ window.addEventListener('load', function () {
         spread = Math.random() * 2.9 + 0.1;
         color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
         lineWidth = Math.floor(Math.random() * 20 + 10);
+        randomizeButton.style.backgroundColor = color;
     }
     randomizeButton.addEventListener('click', function () {
         randomizeFractal();
+        updateSliders();
         drawFractal();
     });
 
     function updateSliders() {
         slider_spread.value = spread;
-        label_spread.innerText = 'Spread: ' + spread;
+        label_spread.innerText = 'Spread: ' + (+spread).toFixed(2);
+        slider_sides.value = sides;
+        label_sides.innerText = 'Sides: ' + sides;
     }
 });
