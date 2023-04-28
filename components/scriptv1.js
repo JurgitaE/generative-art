@@ -134,10 +134,20 @@ function firstVersion() {
 
         function updateSliders() {
             slider_spread.value = spread;
-            label_spread.innerText = 'Spread: ' + (+spread).toFixed(2);
+            label_spread.innerText = 'Spread: ' + (+spread).toFixed(1);
             slider_sides.value = sides;
             label_sides.innerText = 'Sides: ' + sides;
         }
+        window.addEventListener('resize', function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
+            ctx.shadowColor = 'rgba(0, 0 , 0 , 0.7)';
+            ctx.shadowOffsetX = 10;
+            ctx.shadowOffsetY = 5;
+            ctx.shadowBlur = 10;
+            drawFractal();
+        });
     });
 }
 

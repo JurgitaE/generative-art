@@ -1,4 +1,5 @@
 function secondVersion() {
+    document.querySelector('input[name="spread"]').min = '-3.1';
 
     window.addEventListener('load', function () {
         const canvas = document.getElementById('canvas1');
@@ -15,12 +16,12 @@ function secondVersion() {
         ctx.shadowBlur = 10;
 
         let size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
-        const maxLevel = 4;
+        const maxLevel = 8;
         const branches = 2;
 
         let sides = 5;
-        let scale = 0.5;
-        let spread = 0.1;
+        let scale = 0.7;
+        let spread = 0.6;
         let color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
         let lineWidth = Math.floor(Math.random() * 20 + 10);
 
@@ -64,6 +65,9 @@ function secondVersion() {
 
                 ctx.restore();
             }
+            ctx.beginPath();
+            ctx.arc(0, size, size * 0.1, 0, Math.PI * 2);
+            ctx.fill();
 
         }
 
@@ -73,10 +77,12 @@ function secondVersion() {
             ctx.save();
             ctx.lineWidth = lineWidth;
             ctx.strokeStyle = color;
+            ctx.fillStyle = color;
             ctx.translate(canvas.width / 2, canvas.height / 2); //rotation center change
             for (let i = 0; i < sides; i++) {
                 ctx.rotate(Math.PI * 2 / sides); //takes value in radians/ one radian = 57.3deg. full circle Math.PI*2 radians
                 drawBranch(0);
+
             }
             ctx.restore(); //removes all styling for the proceeding elements
             randomizeButton.style.backgroundColor = color;
@@ -86,7 +92,7 @@ function secondVersion() {
 
         function randomizeFractal() {
             sides = Math.floor(Math.random() * 7) + 2;
-            scale = Math.random() * 0.2 + 0.4;
+            scale = Math.random() * 0.4 + 0.4;
             spread = Math.random() * 2.9 + 0.1;
             color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
             lineWidth = Math.floor(Math.random() * 20 + 10);
@@ -114,10 +120,20 @@ function secondVersion() {
 
         function updateSliders() {
             slider_spread.value = spread;
-            label_spread.innerText = 'Spread: ' + (+spread).toFixed(2);
+            label_spread.innerText = 'Spread: ' + (+spread).toFixed(1);
             slider_sides.value = sides;
             label_sides.innerText = 'Sides: ' + sides;
         }
+        window.addEventListener('resize', function () {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
+            ctx.shadowColor = 'rgba(0, 0 , 0 , 0.7)';
+            ctx.shadowOffsetX = 10;
+            ctx.shadowOffsetY = 5;
+            ctx.shadowBlur = 10;
+            drawFractal();
+        });
     });
 }
 
