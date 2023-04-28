@@ -1,6 +1,6 @@
 window.addEventListener('load', function () {
     const canvas = document.getElementById('canvas1');
-    const ctx = canvas.getContext('2d'); //canvas 2D API
+    const ctx = canvas.getContext('2d'); //canvas 2D API holds all canvas drawing methods and settings
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
@@ -12,7 +12,19 @@ window.addEventListener('load', function () {
     ctx.shadowOffsetY = 5;
     ctx.shadowBlur = 10;
 
-    // ctx.fillRect(10, 10, 100, 100); //(x,y. widht, height) draw rectangle
+    // ctx.fillRect(10, 10, 100, 100); //(x,y. width, height) draw rectangle
+    /* 
+        //Draw line
+        ctx.strokeStyle = 'white';
+        ctx.lineWidth = 30;
+        ctx.beginPath(); //starts new path and closes opened before
+        ctx.moveTo(200, 200);
+        ctx.lineTo(300, 300);
+        ctx.stroke();
+    
+        ctx.save(); //saves entire state of canvas
+        ctx.restore(); //removes entire state ofcanvas properties 
+     */
 
     // EFFECT SETTINGS
     let size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
@@ -27,6 +39,7 @@ window.addEventListener('load', function () {
 
     //controls
     const randomizeButton = document.getElementById('randomizeButton');
+    const resetButton = document.getElementById('resetButton');
     const slider_spread = document.getElementById('spread');
     const label_spread = document.querySelector('[for="spread"]');
 
@@ -58,7 +71,7 @@ window.addEventListener('load', function () {
             ctx.scale(scale, scale);
 
             ctx.save();
-            ctx.rotate(spread);
+            ctx.rotate(spread);//full circle 2*Math.PI
             drawBranch(level + 1);
             ctx.restore();
 
@@ -84,6 +97,7 @@ window.addEventListener('load', function () {
             drawBranch(0);
         }
         ctx.restore(); //removes all styling for the proceeding elements
+        randomizeButton.style.backgroundColor = color;
     }
     drawFractal();
     updateSliders(); //initial update
@@ -98,6 +112,20 @@ window.addEventListener('load', function () {
     }
     randomizeButton.addEventListener('click', function () {
         randomizeFractal();
+        updateSliders();
+        drawFractal();
+    });
+
+    function resetFractal() {
+        sides = 5;
+        scale = 0.5;
+        spread = 0.7;
+        color = 'hsl(290, 100%, 50%)';
+        lineWidth = 15;
+    }
+
+    resetButton.addEventListener('click', function () {
+        resetFractal();
         updateSliders();
         drawFractal();
     });
