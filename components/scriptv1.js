@@ -29,7 +29,7 @@ function firstVersion() {
          */
 
         // EFFECT SETTINGS
-        let size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
+        let size = canvas.width < canvas.height ? canvas.width * 0.24 : canvas.height * 0.24;
         const maxLevel = 4;
         const branches = 2;
 
@@ -141,7 +141,7 @@ function firstVersion() {
         window.addEventListener('resize', function () {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
+            size = canvas.width < canvas.height ? canvas.width * 0.24 : canvas.height * 0.24;
             ctx.shadowColor = 'rgba(0, 0 , 0 , 0.7)';
             ctx.shadowOffsetX = 10;
             ctx.shadowOffsetY = 5;

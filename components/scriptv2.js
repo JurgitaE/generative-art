@@ -15,7 +15,7 @@ function secondVersion() {
         ctx.shadowOffsetY = 5;
         ctx.shadowBlur = 10;
 
-        let size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
+        let size = canvas.width < canvas.height ? canvas.width * 0.15 : canvas.height * 0.15;
         const maxLevel = 8;
         const branches = 2;
 
@@ -127,7 +127,7 @@ function secondVersion() {
         window.addEventListener('resize', function () {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            size = canvas.width < canvas.height ? canvas.width * 0.3 : canvas.height * 0.3;
+            size = canvas.width < canvas.height ? canvas.width * 0.15 : canvas.height * 0.15;
             ctx.shadowColor = 'rgba(0, 0 , 0 , 0.7)';
             ctx.shadowOffsetX = 10;
             ctx.shadowOffsetY = 5;
