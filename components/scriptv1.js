@@ -1,4 +1,4 @@
-function firsVersion() {
+function firstVersion() {
 
     window.addEventListener('load', function () {
         const canvas = document.getElementById('canvas1');
@@ -141,5 +141,5 @@ function firsVersion() {
     });
 }
 
-export { firsVersion };
+export { firstVersion };
 

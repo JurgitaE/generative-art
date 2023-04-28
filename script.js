@@ -1,11 +1,11 @@
-import { secondVersion } from "./scriptv2.js";
-import { firsVersion } from "./scriptv1.js";
+import { secondVersion } from "./components/scriptv2.js";
+import { firstVersion } from "./components/scriptv1.js";
 
 const storageKey = 'scriptSrc';
 const versionBtn = document.querySelector('#version');
-const scriptTag = document.querySelector('script');
 
-localStorage.getItem(storageKey) && localStorage.getItem(storageKey) === 'v2' ? secondVersion() : firsVersion();
+localStorage.getItem(storageKey) && localStorage.getItem(storageKey) === 'v2' ? secondVersion() : firstVersion();
+versionBtn.textContent = localStorage.getItem(storageKey) === 'v2' ? 'Version 1' : 'Version 2';
 
 
 function changeScriptSrc() {
@@ -15,9 +15,10 @@ function changeScriptSrc() {
         secondVersion();
     } else {
         versionBtn.textContent = 'Version 2';
-        firsVersion();
+        firstVersion();
     }
     location.reload(true);
+
 }
 
 versionBtn.addEventListener('click', changeScriptSrc);
