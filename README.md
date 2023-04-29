@@ -5,3 +5,4 @@ Own channges and input to the project:
 -   instead of one version of Generative Art, three versions were made (you can check them out by pressing version button);
 -   localStorage was used to save selected version;
 -   where possible, code was refactored to more advanced or modern JS.
+-   adjustments were made to optimize for mobile devices - branch level was decreased if canvas width or height lower than 500px

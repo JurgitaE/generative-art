@@ -16,7 +16,8 @@ function secondVersion() {
         ctx.shadowBlur = 10;
 
         let size = canvas.width < canvas.height ? canvas.width * 0.15 : canvas.height * 0.15;
-        const maxLevel = 8;
+        // Adjusted for mobile
+        const maxLevel = canvas.width > 500 && canvas.height > 500 ? 8 : 4;
         const branches = 2;
 
         let sides = 5;

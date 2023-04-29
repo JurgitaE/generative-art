@@ -30,7 +30,7 @@ function firstVersion() {
 
         // EFFECT SETTINGS
         let size = canvas.width < canvas.height ? canvas.width * 0.24 : canvas.height * 0.24;
-        const maxLevel = 4;
+        const maxLevel = canvas.width > 500 && canvas.height > 500 ? 4 : 3;
         const branches = 2;
 
         let sides = 5;
