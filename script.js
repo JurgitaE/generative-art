@@ -8,11 +8,12 @@ const funcs = [firstVersion, secondVersion, thirdVersion];
 const storageKey = 'scriptSrc';
 const currentLocal = +localStorage.getItem(storageKey);
 
+
 versionBtn.textContent = 'Version ' + (currentLocal && currentLocal === funcs.length ? 1 : currentLocal + 1);
-currentLocal ? funcs[+localStorage.getItem(storageKey) - 1]() : firstVersion();
+currentLocal && typeof currentLocal === 'number' && currentLocal <= funcs.length ? funcs[+localStorage.getItem(storageKey) - 1]() : firstVersion();
 
 function changeScriptSrc() {
-    currentLocal !== funcs.length ? localStorage.setItem(storageKey, '' + (currentLocal + 1)) : localStorage.setItem(storageKey, '1');
+    currentLocal && typeof currentLocal === 'number' && currentLocal < funcs.length ? localStorage.setItem(storageKey, '' + (currentLocal + 1)) : localStorage.setItem(storageKey, '1');
     funcs[+localStorage.getItem(storageKey) - 1]();
     location.reload(true);
 }
